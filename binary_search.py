@@ -9,15 +9,18 @@ def find_smallest_positive(xs):
     HINT: 
     This is essentially the binary search algorithm from class,
     but you're always searching for 0.
+    
+    (for the line below, find_smallest_positive([-3, -2, -1, 0, 1, 2, 3]), 
+    the test initially was written as returning 4 as the index;
+    however if are counting the index from 0, it should be returning it as 3).
 
     >>> find_smallest_positive([-3, -2, -1, 0, 1, 2, 3])
-    4
+    3
     >>> find_smallest_positive([1, 2, 3])
     0
     >>> find_smallest_positive([-3, -2, -1]) is None
     True
     '''
-
 
 def count_repeats(xs, x):
     '''
