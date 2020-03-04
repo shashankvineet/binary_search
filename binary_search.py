@@ -66,41 +66,40 @@ def count_repeats(xs, x):
     '''
 
     left = 0
-    right = len(xs)-1
+    right = len(xs) - 1
 
-    if xs == []:
-        return 0
-
-    def funcOne(left,right):
-        mid = (left+right)//2
+    def funcOne(left, right):
+        mid = (left + right)//2
         if xs[mid] == x:
-            if mid == 0 or x > xs[mid-1]:
+            if mid == 0 or x > xs[mid-1] > x:
                 return mid
             else:
                 return first(left, mid-1)
         if left == right:
             return None
         if x < xs[mid]:
-            return first(mid+1,right)
+            return funcOne(mid+1, right)
         if x > xs[mid]:
-            return first(left,mid-1)
+            return funcOne(left, mid-1)
 
-    def funcTwo(left,right):
+    def funcTwo(left, right):
         mid = (left+right)//2
         if xs[mid] == x:
-            if mid == len(xs)-1 or x > xs[mid+1]:
+            if mid == (len(xs)-1) or x > xs[mid+1]:
                 return mid
             else:
-                return last(mid+1,right)
+                return funcTwo(mid+1, right)
         if left == right:
             return None
         if x < xs[mid]:
-            return last(mid+1,right)
+            return funcTwo(mid+1, right)
         if x > xs[mid]:
-            return last(left,mid-1)
+            return funcTwo(left, mid-1)
     
-    a = funcOne(left,right)
-    b = funcTwo(left,right)
+    if xs == []:
+        return 0
+    a = funcOne(left, right)
+    b = funcTwo(left, right)
 
     if a == None or b == None:
         return 0
