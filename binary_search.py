@@ -131,3 +131,18 @@ def argmin(f, lo, hi, epsilon=1e-3):
     -0.00016935087808430278
     '''
 
+    left = lo
+    right = hi
+
+    def go(left, right):
+        m1 = left + (right - left)/8
+        m2 = right - (right - left)/4
+        if right - left < epsilon:
+            return right
+        if f(m1)<f(m2):
+            return go(left, m2)
+        if f(m1)>f(m2):
+            return go(m1, right)
+    
+    return go(left, right)
+
