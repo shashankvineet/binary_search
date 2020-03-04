@@ -65,6 +65,48 @@ def count_repeats(xs, x):
     0
     '''
 
+    left = 0
+    right = len(xs)-1
+
+    if xs == []:
+        return 0
+
+    def funcOne(left,right):
+        mid = (left+right)//2
+        if xs[mid] == x:
+            if mid == 0 or x > xs[mid-1]:
+                return mid
+            else:
+                return first(left, mid-1)
+        if left == right:
+            return None
+        if x < xs[mid]:
+            return first(mid+1,right)
+        if x > xs[mid]:
+            return first(left,mid-1)
+
+    def funcTwo(left,right):
+        mid = (left+right)//2
+        if xs[mid] == x:
+            if mid == len(xs)-1 or x > xs[mid+1]:
+                return mid
+            else:
+                return last(mid+1,right)
+        if left == right:
+            return None
+        if x < xs[mid]:
+            return last(mid+1,right)
+        if x > xs[mid]:
+            return last(left,mid-1)
+    
+    a = funcOne(left,right)
+    b = funcTwo(left,right)
+
+    if a == None or b == None:
+        return 0
+    else:
+        return b-a+1
+
 
 def argmin(f, lo, hi, epsilon=1e-3):
     '''
