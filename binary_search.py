@@ -68,44 +68,46 @@ def count_repeats(xs, x):
     left = 0
     right = len(xs) - 1
 
-    def funcOne(left, right):
+    def first(left,right):
         mid = (left+right)//2
         if xs[mid] == x:
-            if mid == 0 or x > xs[mid-1] > x:
+            if mid == 0 or xs[mid-1] > x:
                 return mid
             else:
-                return funcOne(left, mid-1)
+                return first(left, mid - 1)
         if left == right:
             return None
         if x < xs[mid]:
-            return funcOne(mid+1, right)
+            return first(mid + 1,right)
         if x > xs[mid]:
-            return funcOne(left, mid-1)
+            return first(left, mid - 1)
 
-    def funcTwo(left, right):
+    def second(left,right):
         mid = (left+right)//2
-        if xs[mid] == x:
-            if mid == (len(xs)-1) or x > xs[mid+1]:
+        if x == xs[mid]:
+            if mid == len(xs)-1 or x > xs[mid+1]:
                 return mid
             else:
-                return funcTwo(mid+1, right)
+                return second(mid + 1, right)
         if left == right:
             return None
         if x < xs[mid]:
-            return funcTwo(mid+1, right)
+            return second(mid + 1,right)
         if x > xs[mid]:
-            return funcTwo(left, mid-1)
-        
+            return second(left, mid - 1)
+
     if len(xs) == 0:
         return 0
 
-    a = funcOne(left, right)
-    b = funcTwo(left, right)
+    one = first(left, right)
+    two = second(left, right)
 
-    if a == None or b == None:
+    if one == None or two == None:
         return 0
     else:
-        return b - a + 1
+        return two-one+1
+
+
 
 
 def argmin(f, lo, hi, epsilon=1e-3):
