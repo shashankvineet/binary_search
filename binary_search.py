@@ -74,7 +74,7 @@ def count_repeats(xs, x):
             if mid == 0 or x > xs[mid-1] > x:
                 return mid
             else:
-                return first(left, mid-1)
+                return funcOne(left, mid-1)
         if left == right:
             return None
         if x < xs[mid]:
